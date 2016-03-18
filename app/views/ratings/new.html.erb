@@ -3,22 +3,25 @@
   <%= link_to 'Give Feedback', new_review_path, class: 'mini-nav-link' %>
   <%= link_to 'Get Feedback', reviews_path, class: 'mini-nav-link' %>
 </nav>
-
-<%= form_for(@rating) do |f| %>
-  <p><%= @next_up.comment %></p>
-  <%= f.hidden_field :review_id, value: @next_up.id %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
-  <% feedback_values = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'] %>
-  <ul>
-    <% [:specificity, :actionability, :kindness].each do |label| %>
-    <li>
-      <%= f.label label %>
-      <% feedback_values.each_with_index do |value, index| %>
-         <%= f.label value %>
-         <%= f.radio_button label, index+1 %>
+<% if @next_up.present? %>
+  <%= form_for(@rating) do |f| %>
+    <p><%= @next_up.comment %></p>
+    <%= f.hidden_field :review_id, value: @next_up.id %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <% feedback_values = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'] %>
+    <ul>
+      <% [:specificity, :actionability, :kindness].each do |label| %>
+      <li>
+        <%= f.label label %>
+        <% feedback_values.each_with_index do |value, index| %>
+           <%= f.label value %>
+           <%= f.radio_button label, index+1 %>
+        <% end %>
+      </li>
       <% end %>
-    </li>
-    <% end %>
-  </ul>
-  <%= f.submit %>
+    </ul>
+    <%= f.submit %>
+  <% end %>
+<% else %>
+    <p>There's nothing to review</p>
 <% end %>

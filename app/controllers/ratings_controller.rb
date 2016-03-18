@@ -6,7 +6,12 @@ class RatingsController < ApplicationController
   def new
     @rating = Rating.new
     blacklist = Rating.where(user_id: current_user.id).pluck(:review_id)
-    @next_up = Review.where.not(reviewer_id: current_user.id).where.not(user_id: current_user.id).where("id NOT IN (?)", blacklist).where('rating_count < ?', 3).order('created_at ASC').first
+    if blacklist.length > 0
+      @next_up = Review.where.not(reviewer_id: current_user.id).where.not(user_id: current_user.id).where("id NOT IN (?)", blacklist).where('rating_count < ?', 3).order('created_at ASC').first
+    else
+      @next_up = Review.where.not(reviewer_id: current_user.id).where.not(user_id: current_user.id).where('rating_count < ?', 3).order('created_at ASC').first
+    end
+
   end
 
   def create
