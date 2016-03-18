@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160318173605) do
+ActiveRecord::Schema.define(version: 20160318230840) do
 
   create_table "ratings", force: :cascade do |t|
     t.integer  "review_id"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20160318173605) do
 
   create_table "reviews", force: :cascade do |t|
     t.text     "comment"
-    t.integer  "rating_count"
+    t.integer  "rating_count", default: 0
     t.integer  "reviewer_id"
     t.integer  "user_id"
     t.datetime "created_at"
