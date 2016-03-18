@@ -5,9 +5,8 @@ class RatingsController < ApplicationController
 
   def new
     @rating = Rating.new
-    blacklist = Rating.where(user_id: 4).pluck(:review_id)
-    @next_up = Review.where("id NOT IN (?)", blacklist).where('rating_count < 3').order('created_at ASC').first
-    # @next_up = Review.where('rating_count <= ?', 3).order('created_at ASC').first
+    blacklist = Rating.where(user_id: current_user.id).pluck(:review_id)
+    @next_up = Review.where.not(reviewer_id: current_user.id).where.not(user_id: current_user.id).where("id NOT IN (?)", blacklist).where('rating_count < ?', 3).order('created_at ASC').first
   end
 
   def create
