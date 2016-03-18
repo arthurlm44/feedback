@@ -26,5 +26,4 @@ class ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:comment, :user_id, :reviewer_id, statement_scores_attributes: [:statement_id, :score])
   end
-
 end
