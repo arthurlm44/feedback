@@ -1,6 +1,16 @@
 class ReviewsController < ApplicationController
 
   def index
+    @reviews = Review.where(user_id: current_user.id).where('rating_count >= 2')
+
+    @review_scores = {}
+    @reviews.each do |review|
+      score_hash = {}
+      review.statement_scores.each do |statement_score|
+        score_hash[statement_score.statement_id] = statement_score.score
+      end
+      @review_scores[review.id] = score_hash
+    end
   end
 
   def new
