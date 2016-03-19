@@ -1,31 +1,24 @@
-<nav class='mini-nav'>
-  <%= link_to 'Home', root_path, class: 'mini-nav-link' %>
-  <%= link_to 'Rate Feedback', new_rating_path, class: 'mini-nav-link' %>
-  <%= link_to 'Get Feedback', reviews_path, class: 'mini-nav-link' %>
-</nav>
+<%= render partial: 'layouts/logout_button' %>
 
 <%= form_for(@review) do |f| %>
-    <%= f.label 'Feedback' %>
-    <%= f.text_area :comment %>
+  <%= f.label 'Feedback' %>
+  <%= f.text_area :comment %>
+  <%= f.collection_select :user_id, @users, :id, :email %>
+  <ul>
+    <%= f.fields_for :statement_scores do |field| %>
+      <li>
+        <% id = field.object.statement_id %>
+        <%= @statements.find { |s| s.id == id }.phrase %>
+        <%= field.hidden_field :statement_id %>
+        <% scale_of_ratings.each_with_index do |radio_name, index| %>
+          <br>
+          <%= field.radio_button :score, index+1 %>
+          <%= field.label radio_name %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
 
-    <%= f.collection_select :user_id, @users, :id, :email %>
-    <ul>
-      <%= f.fields_for :statement_scores do |field| %>
-           <li> <% id = field.object.statement_id %>
-             <%= @statements.find { |s| s.id == id}.phrase %>
-
-             <%= field.hidden_field :statement_id %>
-
-             <% ['Never', 'Rarely', 'Sometimes', 'Mostly', 'Always', 'n/a'].each_with_index do |radio_name, index| %>
-                 <br>
-                 <%= field.radio_button :score, index+1 %>
-                 <%= field.label radio_name %>
-             <% end %>
-           </li>
-
-      <% end %>
-    </ul>
-    <%= f.hidden_field :reviewer_id, value: @reviewer.id %>
-
-    <%= f.submit %>
+  <%= f.hidden_field :reviewer_id, value: @reviewer.id %>
+  <%= f.submit %>
 <% end %>

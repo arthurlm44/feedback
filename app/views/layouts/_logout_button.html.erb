@@ -1,0 +1,6 @@
+<nav class='mini-nav'>
+  <%= link_to 'Home', root_path, class: 'mini-nav-link' %>
+  <%= link_to 'Rate Feedback', new_rating_path, class: 'mini-nav-link' %>
+  <%= link_to 'Get Feedback', reviews_path, class: 'mini-nav-link' %>
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'mini-nav-link' %>
+</nav>

@@ -1,8 +1,5 @@
-<nav class='mini-nav'>
-  <%= link_to 'Home', root_path, class: 'mini-nav-link' %>
-  <%= link_to 'Give Feedback', new_review_path, class: 'mini-nav-link' %>
-  <%= link_to 'Get Feedback', reviews_path, class: 'mini-nav-link' %>
-</nav>
+<%= render partial: 'layouts/logout_button' %>
+
 <% if @next_up.present? %>
   <%= form_for(@rating) do |f| %>
     <p><%= @next_up.comment %></p>
