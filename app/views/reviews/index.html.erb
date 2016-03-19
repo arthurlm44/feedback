@@ -1,6 +1,11 @@
 <%= render partial: 'layouts/logout_button' %>
 
-<div class="my-reviews hidden">
+<div class="tabs">
+  <%= link_to 'Feedback', '#my-reviews', class: 'tab-link tab-my-reviews active' %>
+  <%= link_to 'Meta Feedback', '#my-meta-reviews', class: 'tab-link tab-my-meta-reviews' %>
+</div>
+
+<div class="my-reviews" id="my-reviews">
   <% if @reviews.present? %>
     <% @reviews.each do |review| %>
       <h2><%= review.comment %></h2>
@@ -14,7 +19,7 @@
   <% end %>
 </div>
 
-<div class="my-meta-reviews">
+<div class="my-meta-reviews hidden" '#my-meta-reviews'>
   <% if @reviews_by_user.present? %>
       <% @reviews_by_user.each do |review| %>
           <h2><%= review.comment %></h2>

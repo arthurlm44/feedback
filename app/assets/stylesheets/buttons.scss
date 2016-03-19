@@ -9,3 +9,23 @@
   color: white;
 }
 
+.tabs {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.tab-link {
+  background-color: white;
+  box-sizing: border-box;
+  padding: 10px;
+  text-decoration: none;
+  display: inline-block;
+  
+  &.active {
+    border-top: 1px solid #e8e8e8;
+    border-left: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
+    border-top-left-radius: 3px; 
+    border-top-right-radius: 3px; 
+    border-bottom: 1px solid white;
+  }
+}
