@@ -1,24 +1,28 @@
 <%= render partial: 'layouts/logout_button' %>
 
-<%= form_for(@review) do |f| %>
-  <%= f.label 'Feedback' %>
-  <%= f.text_area :comment %>
+<h2>Give Some Feedback!</h2>
+
+<%= form_for(@review, :html => {:class => "form-new-review"}) do |f| %>
   <%= f.collection_select :user_id, @users, :id, :email %>
+  <div><%= f.text_area :comment %></div>
   <ul>
     <%= f.fields_for :statement_scores do |field| %>
       <li>
         <% id = field.object.statement_id %>
-        <%= @statements.find { |s| s.id == id }.phrase %>
+        <p class="statements"><%= @statements.find { |s| s.id == id }.phrase %></p>
         <%= field.hidden_field :statement_id %>
-        <% scale_of_ratings.each_with_index do |radio_name, index| %>
-          <br>
-          <%= field.radio_button :score, index+1 %>
-          <%= field.label radio_name %>
-        <% end %>
+        <div class="radios">
+          <div class="inner-radios">
+            <% scale_of_ratings.each_with_index do |radio_name, index| %>
+              <%= field.radio_button :score, index+1 %>
+              <%= field.label radio_name %>
+            <% end %>
+          </div>
+        </div>
       </li>
     <% end %>
   </ul>
 
   <%= f.hidden_field :reviewer_id, value: @reviewer.id %>
-  <%= f.submit %>
+  <%= f.submit 'Send Anonymous Feedback', class: 'btn btn-blue btn-review-new' %>
 <% end %>
