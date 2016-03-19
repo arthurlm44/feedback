@@ -1,5 +1,7 @@
 class ReviewsController < ApplicationController
 
+  before_action :authenticate_user!
+
   def index
     @reviews = Review.where(user_id: current_user.id).where('rating_count >= 2')
 
