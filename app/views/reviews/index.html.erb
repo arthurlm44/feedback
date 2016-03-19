@@ -4,14 +4,33 @@
   <%= link_to 'Rate Feedback', new_rating_path, class: 'mini-nav-link' %>
 </nav>
 
-<% if @reviews.present? %>
-  <% @reviews.each do |review| %>
-    <h2><%= review.comment %></h2>
-    <% review.statements.each do |statement| %>
-      <p><span><%= @review_scores[review.id][statement.id] %></span><%= statement.phrase %></p>
+<div class="my-reviews hidden">
+  <% if @reviews.present? %>
+    <% @reviews.each do |review| %>
+      <h2><%= review.comment %></h2>
+      <% review.statements.each do |statement| %>
+        <p><span><%= @review_scores[review.id][statement.id] %></span><%= statement.phrase %></p>
 
-    <% end  %>
+      <% end  %>
+    <% end %>
+  <% else %>
+      <p>You ain't got no reviews, pardner.</p>
   <% end %>
-<% else %>
-    <p>You ain't got no reviews, pardner.</p>
-<% end %>
+</div>
+
+<div class="my-meta-reviews">
+  <% if @reviews_by_user.present? %>
+      <% @reviews_by_user.each do |review| %>
+          <h2><%= review.comment %></h2>
+          <% ['actionability', 'specificity', 'kindness'].each do |name| %>
+              <p><%= name %>
+              <% @meta_scores[review.id][name].each do |key, value| %>
+                    <%= value %>
+              <% end %>
+              </p>
+          <% end  %>
+      <% end %>
+  <% else %>
+      <p>You ain't given no reviews, pardner.</p>
+  <% end %>
+</div>
