@@ -1,21 +1,35 @@
+<h2>Rate this Feeback</h2>
+<p>The feedback message below is feedback given to another Mavenlink employee. Help one another by rating the feedback on its kindness and other values. Kind feedback is shared with the recipient; unkind feedback is not. After you rate enough feedback, you'll start seeing your own feedback appearing on the 'Get Feedback' page.</p>
+
+<div class="line"></div>
+
+<h2>Feedback</h2>
+<div class="radio-button-labels float-right">
+  <p class="radio-rating-label">Strongly Disagree</p> 
+  <p class="radio-rating-label">Disagree</p> 
+  <p class="radio-rating-label">Neutral</p> 
+  <p class="radio-rating-label">Agree</p> 
+  <p class="radio-rating-label">Strongly Agree</p>
+</div>
+
 <% if @next_up.present? %>
-  <%= form_for(@rating) do |f| %>
-    <p><%= @next_up.comment %></p>
+  <%= form_for(@rating, :html => {:class => "form-new-rating"}) do |f| %>
+    <p class="comment float-left "><%= @next_up.comment %></p>
     <%= f.hidden_field :review_id, value: @next_up.id %>
     <%= f.hidden_field :user_id, value: current_user.id %>
-    <% feedback_values = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'] %>
-    <ul>
+    <ul class="ratings-group float-right">
       <% [:specificity, :actionability, :kindness].each do |label| %>
       <li>
-        <%= f.label label %>
-        <% feedback_values.each_with_index do |value, index| %>
-           <%= f.label value %>
-           <%= f.radio_button label, index+1 %>
-        <% end %>
+        <p class="rating-name <%= label %>"><%= f.label label %></p>
+        <span class="radios-ratings">
+          <% 1.upto(5) do |num| %>
+             <%= f.radio_button label, num %>
+          <% end %>
+        </span>
       </li>
       <% end %>
     </ul>
-    <%= f.submit %>
+    <%= f.submit 'Rate this Feedback!', class: 'btn btn-blue' %>
   <% end %>
 <% else %>
     <p>There's nothing to review</p>

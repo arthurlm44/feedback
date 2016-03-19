@@ -17,6 +17,10 @@ ul {
   padding: 0;
 }
 
+p {
+  font-size: 14px;
+}
+
 .container-main {
   box-sizing: border-box;
   margin: 0 auto;
@@ -48,7 +52,13 @@ ul {
 
 .mini-nav {
   margin-bottom: 20px;
-  border-bottom: 1px solid #B0B0B0 ;
+  border-bottom: 1px solid #b0b0b0 ;
+}
+
+.line {
+  border-bottom: 1px solid lighten(#858585, 30%);
+  width: 500px;
+  margin: 20px auto 30px auto;
 }
 
 .mini-nav-link {
