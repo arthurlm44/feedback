@@ -11,6 +11,24 @@ class ReviewsController < ApplicationController
       end
       @review_scores[review.id] = score_hash
     end
+
+    @reviews_by_user = Review.where(reviewer_id: current_user.id).where('rating_count >= 2')
+    @meta_scores = {}
+    @reviews_by_user.each do |review|
+      rating_totals = {}
+      rating_totals['specificity'] = {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0}
+      rating_totals['actionability'] = {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0}
+      rating_totals['kindness'] = {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0}
+      ratings = review.ratings
+      ratings.each do |rating|
+        rating_totals['specificity'][rating.specificity] += 1
+        rating_totals['actionability'][rating.actionability] += 1
+        rating_totals['kindness'][rating.kindness] += 1
+      end
+      @meta_scores[review.id] = rating_totals
+    end
+
+
   end
 
   def new
