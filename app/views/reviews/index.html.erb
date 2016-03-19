@@ -1,0 +1,17 @@
+<nav class='mini-nav'>
+  <%= link_to 'Home', root_path, class: 'mini-nav-link' %>
+  <%= link_to 'Give Feedback', new_review_path, class: 'mini-nav-link' %>
+  <%= link_to 'Rate Feedback', new_rating_path, class: 'mini-nav-link' %>
+</nav>
+
+<% if @reviews.present? %>
+  <% @reviews.each do |review| %>
+    <h2><%= review.comment %></h2>
+    <% review.statements.each do |statement| %>
+      <p><span><%= @review_scores[review.id][statement.id] %></span><%= statement.phrase %></p>
+
+    <% end  %>
+  <% end %>
+<% else %>
+    <p>You ain't got no reviews, pardner.</p>
+<% end %>

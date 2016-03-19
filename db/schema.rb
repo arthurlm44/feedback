@@ -11,7 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316205558) do
+ActiveRecord::Schema.define(version: 20160318230840) do
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer  "review_id"
+    t.integer  "user_id"
+    t.integer  "specificity"
+    t.integer  "actionability"
+    t.integer  "kindness"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text     "comment"
+    t.integer  "rating_count", default: 0
+    t.integer  "reviewer_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "statement_scores", force: :cascade do |t|
+    t.integer "review_id"
+    t.integer "statement_id"
+    t.integer "score"
+  end
+
+  create_table "statements", force: :cascade do |t|
+    t.text "phrase"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
