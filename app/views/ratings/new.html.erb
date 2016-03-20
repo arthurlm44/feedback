@@ -4,13 +4,16 @@
 <div class="line"></div>
 
 <h2>Feedback</h2>
-<div class="radio-button-labels float-right">
-  <p class="radio-rating-label">Strongly Disagree</p> 
-  <p class="radio-rating-label">Disagree</p> 
-  <p class="radio-rating-label">Neutral</p> 
-  <p class="radio-rating-label">Agree</p> 
-  <p class="radio-rating-label">Strongly Agree</p>
-</div>
+
+<% if @next_up.present? %>
+  <div class="radio-button-labels float-right">
+    <p class="radio-rating-label">Strongly Disagree</p> 
+    <p class="radio-rating-label">Disagree</p> 
+    <p class="radio-rating-label">Neutral</p> 
+    <p class="radio-rating-label">Agree</p> 
+    <p class="radio-rating-label">Strongly Agree</p>
+  </div>
+<% end %>
 
 <% if @next_up.present? %>
   <%= form_for(@rating, :html => {:class => "form-new-rating"}) do |f| %>
