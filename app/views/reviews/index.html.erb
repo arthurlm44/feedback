@@ -1,9 +1,8 @@
 <h2>Here's Your Feedback</h2>
 
 <div class="tabs">
-  <%= link_to 'Feedback', '#my-reviews', class: 'tab-link tab-my-reviews active' %>
-  <%= link_to 'Meta Feedback', '#my-meta-reviews', class: 'tab-link tab-my-meta-reviews' %>
-  <div class="tab-line"></div>
+  <%= link_to 'Feedback', '', class: 'tab-link tab-my-reviews active' %>
+  <%= link_to 'Meta Feedback', '', class: 'tab-link tab-my-meta-reviews' %>
 </div>
 
 <div class="my-reviews" id="my-reviews">
@@ -46,3 +45,7 @@
       <p>You ain't given no reviews, pardner.</p>
   <% end %>
 </div>
+
+<script type="text/javascript">
+  swapTabs();
+</script>

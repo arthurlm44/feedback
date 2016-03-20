@@ -1,16 +1,18 @@
-$(document).ready(function(){
+var swapTabs = function() {
   $('.tab-link').on('click', function(e){
     e.preventDefault();
-    if ($(this).hasClass('tab-my-reviews')) {
-      $(this).addClass('active');
-      $('.tab-my-meta-reviews').removeClass('active');
+
+    $link = $(this);
+    $('.tab-link').removeClass('active')
+    $link.addClass('active');
+
+    if ($link.hasClass('tab-my-reviews')) {
       $('#my-reviews').show();
       $('#my-meta-reviews').hide();
-    } else {
+    } else if ($link.hasClass('tab-my-meta-reviews')) {
       $('.tab-my-meta-reviews').addClass('active');
-      $('.tab-my-reviews').removeClass('active');
       $('#my-reviews').hide();
       $('#my-meta-reviews').show();
     }
   });
-});
+}
