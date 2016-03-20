@@ -7,8 +7,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= render partial: 'layouts/main_nav' %>
 <div class="container-main">
-  <%= render partial: 'layouts/mini_nav' %>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
   <%= yield %>

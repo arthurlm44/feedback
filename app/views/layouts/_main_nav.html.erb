@@ -1,0 +1,14 @@
+<nav class='main-nav'>
+  <div class="main-nav-container">
+    <%= link_to 'Give Feedback', new_review_path, class: "main-nav-link #{'active' if nav_link_active?(new_review_path) || nav_link_active?(root_path)}" %>
+    <%= link_to 'Rate Feedback', new_rating_path, class: "main-nav-link #{'active' if nav_link_active?(new_rating_path)}" %>
+    <%= link_to 'Get Feedback', reviews_path, class: "main-nav-link #{'active' if nav_link_active?(reviews_path || root_path)}" %>
+
+    <% if current_user %>
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'main-nav-link float-right' %>
+    <% else %>
+      <%= link_to "Sign In", new_user_session_path, class: 'main-nav-link float-right' %>
+      <%= link_to "Sign Up", new_user_registration_path, class: 'main-nav-link float-right' %>
+    <% end %>
+  </div>
+</nav>

@@ -19,8 +19,14 @@
   padding: 10px;
   text-decoration: none;
   display: inline-block;
+  color: #858585;
 
   &.active {
     border-bottom: 4px solid #438ee9;
+    color: lighten(#858585, 25%);
+  }
+
+  &:hover {
+    color: darken(#858585, 25%);
   }
 }
