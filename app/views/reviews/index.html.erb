@@ -7,42 +7,54 @@
 
 <div class="my-reviews" id="my-reviews">
   <% if @reviews.present? %>
-    <% @reviews.each do |review| %>
-    <div class="review">
-      <p class="review-comment"><%= review.comment %></p>
-      <% review.statements.each do |statement| %>
-        <p class="statements"><%= statement.phrase %></p>
-        <div class="radios">
-          <div class="inner-radios">
-            <% scale_of_ratings.each_with_index do |radio_name, index| %>
-              <%= label_tag radio_name %>
-              <div class="radio-circle <%= 'checked' if @review_scores[review.id][statement.id]==index+1%>"></div>
-            <% end %>
-          </div>
-        </div>
-      <% end  %>
+  <% @reviews.each do |review| %>
+  <div class="review">
+    <p class="review-comment"><%= review.comment %></p>
+    <% review.statements.each do |statement| %>
+    <p class="statements"><%= statement.phrase %></p>
+    <div class="radios">
+      <div class="inner-radios">
+        <% scale_of_ratings.each_with_index do |radio_name, index| %>
+        <%= label_tag radio_name %>
+        <div class="radio-circle <%= 'checked' if @review_scores[review.id][statement.id]==index+1%>"></div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
+    <% end  %>
+  </div>
+  <% end %>
   <% else %>
-      <p>You ain't got no reviews, pardner.</p>
+  <p>You ain't got no reviews, pardner.</p>
   <% end %>
 </div>
 <div class="my-meta-reviews hidden" id='my-meta-reviews'>
   <% if @reviews_by_user.present? %>
-      <% @reviews_by_user.each do |review| %>
-          <h2><%= review.comment %></h2>
-          <% ['actionability', 'specificity', 'kindness'].each do |name| %>
-              <p><%= name %>
-              <% @meta_scores[review.id][name].each do |key, value| %>
-                <% 1.upto(6) do |num| %>
-                  <input type="radio" name="gender" value<%= value == num %>>
-                <% end %>
-              <% end %>
-              </p>
-          <% end  %>
-      <% end %>
+  <% @reviews_by_user.each do |review| %>
+  <div class="meta-review clearfix">
+    <div class="radio-button-labels float-right">
+      <p class="radio-rating-label">Strongly Disagree</p> 
+      <p class="radio-rating-label">Disagree</p> 
+      <p class="radio-rating-label">Neutral</p> 
+      <p class="radio-rating-label">Agree</p> 
+      <p class="radio-rating-label">Strongly Agree</p>
+    </div>
+    <p class="comment float-left"><%= review.comment %></p>
+    <div class="ratings-group float-right">
+      <% ['actionability', 'specificity', 'kindness'].each do |name| %>
+      <p class="rating-name rating-name-results"><%= name %></p>
+      <span class="radios-ratings"> 
+        <% @meta_scores[review.id][name].each do |key, value| %>
+        <span class="rating-values"><%= value %></span>
+        <% end %>
+      </span>
+      <br>
+      <% end  %>
+    </div>
+  </div>
+  <% end %>
+
   <% else %>
-      <p>You ain't given no reviews, pardner.</p>
+  <p>You ain't given no reviews, pardner.</p>
   <% end %>
 </div>
 

@@ -21,7 +21,7 @@
     <%= f.hidden_field :review_id, value: @next_up.id %>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <ul class="ratings-group float-right">
-      <% [:specificity, :actionability, :kindness].each do |label| %>
+      <% [:actionability, :specificity, :kindness].each do |label| %>
       <li>
         <p class="rating-name <%= label %>"><%= f.label label %></p>
         <span class="radios-ratings">
