@@ -12,8 +12,8 @@
         <div class="radios">
           <div class="inner-radios">
             <% scale_of_ratings.each_with_index do |radio_name, index| %>
-              <%= field.radio_button :score, index+1 %>
               <%= field.label radio_name %>
+              <%= field.radio_button :score, index+1 %>
             <% end %>
           </div>
         </div>
