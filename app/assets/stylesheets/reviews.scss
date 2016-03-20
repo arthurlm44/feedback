@@ -60,10 +60,36 @@
   display: inline-block;
   font-size: 14px;
   width: 41%;
-  padding: 10px;
   box-sizing: border-box;
 }
 
 .statements {
   width: 58%;
+}
+
+.review {
+  padding: 10px 20px;
+  background-color: #f6f6f2;
+  margin-bottom: 30px;
+  border-radius: 3px;
+
+  .radios {
+    padding: 0;
+  }
+}
+
+.review-comment {
+  font-weight: bold;
+}
+
+.radio-circle {
+  width: 10px;
+  height: 10px;
+  border: 1px solid #4da620;
+  border-radius: 50%;  
+  display: inline-block;
+
+  &.checked {
+    background-color: #4da620;
+  }
 }

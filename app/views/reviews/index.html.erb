@@ -1,30 +1,41 @@
 <div class="tabs">
   <%= link_to 'Feedback', '#my-reviews', class: 'tab-link tab-my-reviews active' %>
   <%= link_to 'Meta Feedback', '#my-meta-reviews', class: 'tab-link tab-my-meta-reviews' %>
+  <div class="tab-line"></div>
 </div>
 
 <div class="my-reviews" id="my-reviews">
   <% if @reviews.present? %>
     <% @reviews.each do |review| %>
-      <h2><%= review.comment %></h2>
+    <div class="review">
+      <p class="review-comment"><%= review.comment %></p>
       <% review.statements.each do |statement| %>
-        <p><span><%= @review_scores[review.id][statement.id] %></span><%= statement.phrase %></p>
-
+        <p class="statements"><%= statement.phrase %></p>
+        <div class="radios">
+          <div class="inner-radios">
+            <% scale_of_ratings.each_with_index do |radio_name, index| %>
+              <%= label_tag radio_name %>
+              <div class="radio-circle <%= 'checked' if @review_scores[review.id][statement.id]==index+1%>"></div>
+            <% end %>
+          </div>
+        </div>
       <% end  %>
+      </div>
     <% end %>
   <% else %>
       <p>You ain't got no reviews, pardner.</p>
   <% end %>
 </div>
-
-<div class="my-meta-reviews hidden" '#my-meta-reviews'>
+<div class="my-meta-reviews hidden" id='my-meta-reviews'>
   <% if @reviews_by_user.present? %>
       <% @reviews_by_user.each do |review| %>
           <h2><%= review.comment %></h2>
           <% ['actionability', 'specificity', 'kindness'].each do |name| %>
               <p><%= name %>
               <% @meta_scores[review.id][name].each do |key, value| %>
-                    <%= value %>
+                <% 1.upto(6) do |num| %>
+                  <input type="radio" name="gender" value<%= value == num %>>
+                <% end %>
               <% end %>
               </p>
           <% end  %>

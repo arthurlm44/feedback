@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @reviews = Review.where(user_id: current_user.id).where('rating_count >= 2')
+    @reviews = Review.where(user_id: current_user.id).where('rating_count >= 2').order('updated_at DESC')
 
     @review_scores = {}
     @reviews.each do |review|
@@ -29,8 +29,6 @@ class ReviewsController < ApplicationController
       end
       @meta_scores[review.id] = rating_totals
     end
-
-
   end
 
   def new
