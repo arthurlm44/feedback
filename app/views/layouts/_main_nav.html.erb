@@ -1,5 +1,6 @@
 <nav class='main-nav'>
   <div class="main-nav-container">
+    <%= link_to 'Home', root_path, class: "main-nav-link" %>
     <%= link_to 'Give Feedback', new_review_path, class: "main-nav-link #{'active' if nav_link_active?(new_review_path)}" %>
     <%= link_to 'Rate Feedback', new_rating_path, class: "main-nav-link #{'active' if nav_link_active?(new_rating_path)}" %>
     <%= link_to 'Get Feedback', reviews_path, class: "main-nav-link #{'active' if nav_link_active?(reviews_path) || nav_link_active?(root_path)}" %>

@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render partial: 'layouts/main_nav' %>
+  <%= render partial: 'layouts/main_nav' unless current_page?(root_path) %>
 <div class="container-main">
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>

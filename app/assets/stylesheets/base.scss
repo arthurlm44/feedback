@@ -5,6 +5,10 @@ html, body {
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 .clearfix {
   zoom: 1;
 
@@ -56,26 +60,6 @@ p {
   line-height: 78px;
 }
 
-.main-link {
-  border: 1px solid #B0B0B0 ;
-  padding: 50px;
-  margin: 30px 0;
-  background-color: #E5E5E5 ;
-  color: #858585 ;
-  display: inline-block;
-  text-decoration: none;
-  text-align: center;
-  font-size: 28px;
-  font-weight: 300;
-  transition: background-color 0.5s ease;
-
-  &:hover {
-    background-color: #D9D9D9 ;
-    color: #666666 ;
-    border-color: #A1A1A1 ;
-  }
-}
-
 .main-nav {
   margin-bottom: 20px;
   border-bottom: 1px solid #b0b0b0;
@@ -90,7 +74,6 @@ p {
 
 .main-nav-link {
   text-align: center;
-  text-decoration: none;
   color: #858585;
   margin-right: 50px;
 
@@ -105,5 +88,28 @@ p {
 
   &.active {
     color: lighten(#858585, 25%);
+  }
+}
+
+.main-link-group {
+  padding-top: 30px;
+}
+
+.main-link {
+  display: block;
+  text-align: center;
+  padding: 50px 100px;
+  border: 1px solid #858585;
+  width: 80%;
+  margin: 30px auto 50px auto;
+  color: #858585;
+  font-size: 28px;
+  transition: background-color 0.5s ease;
+  background-color: #f6f6f2;
+
+  &:hover {
+    background-color: darken(#f6f6f2, 5%);
+    color: darken(#858585, 25%);
+    border-color: darken(#858585, 25%);
   }
 }
